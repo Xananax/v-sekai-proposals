@@ -10,24 +10,35 @@ Godot Engine has a great asset library browser.
 
 Why can't we reuse it for alternative Godot engine asset libraries?
 
+This is a pattern used by package managers for long (npm, apt, pacman, f-droid, ...).
+
 ## Describe the proposed option and how it helps to overcome the problem or limitation
 
-Add an alternative server and document the current api as an openapi schema.
+1. Add an alternative server
+2. document the current api as an openapi schema.
 
 ## Describe how your proposal will work, with code, pseudo-code, mock-ups, or diagrams
 
 1. Openapi schema for the official asset library api.
-1. Elixir server implementation
+1. Elixir server implementation (using the current server as a reference implementation)
 2. Patch to Godot Engine to add arbitrary asset libraries
 
 ## Positive Consequences <!-- optional -->
 
-- More freedom.
-- Xananax said he'll use it. Xanax's games are made 100% of addons with assets and glue code being the game.
+- allow teams working on a specific project to share common assets privately in a centralized location
+- allow teams and individuals to create personal libraries with starter kits, templates, or common plugins that are reused from project to project
+- enable alternative libraries to exist, to:
+  -  short-circuit Godot's approval process
+  -  curate a different selection with different standards (only the highest quality, or accepting even broken plugins, etc)
+  -  curate plugins pertaining to a specific ecosystem (using a specific language, a specific API, ...) 
+  -  group thematically or authorially related addons under one umbrella
+
 
 ## Negative Consequences <!-- optional -->
 
-- Different libraries
+- Exposes Godot users to more abuse and/or vulnerabilities (mitigation: clearly warn users that by using a third party repository, they're responsible of the trust they put in
+- Increases the complexity of the UI (mitigation: add alternative repositories in the main settings, or behind a de-prioritized buttin)
+- Forces to write and maintain a spec for server changes, which can slow down the development of new features 
 
 ## Option graveyard: <!-- same as above -->
 
@@ -36,11 +47,11 @@ Add an alternative server and document the current api as an openapi schema.
 
 ## If this enhancement will not be used often, can it be worked around with a few lines of script?
 
-Could be a few lines of script. Unsure of scope. The server can be a lot too.
-
+- Creating a user-space plugin that uses an alternative repository is doable, but it'd be a lot of work, and wouldn't follow the same patterns or use the same widgets as the main library
+ 
 ## Is there a reason why this should be core and done by us?
 
-Not so core, but I can do it.
+The scope of writing a reference server, as well as maintaining documentation for the API and match it with the client makes this project a bit too complex to be maintained externally.
 
 ## References <!-- optional -->
 
